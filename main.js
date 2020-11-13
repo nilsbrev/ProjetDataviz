@@ -7,4 +7,4 @@ async function getSongsByAward(awardName) {
     let data = await response.json()
     return data;
 }
-getSongsByAward("Platinium").then(data => console.log(data));
+getSongsByAward("Platinum").then(data => console.log(data));
