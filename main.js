@@ -1,2 +1,10 @@
-d3.select("body").append("span")
-    .text("Exemple de script (au dessus c'est l'image SVG vide 1200x800, on peut y mettre des bars etc");
+
+// Search - Get songs by awardName
+
+async function getSongsByAward(awardName) {
+    // async, await, then servent à forcer le synchronisme (par défaut js asynchrone)
+    let response = await fetch("https://wasabi.i3s.unice.fr/search/award/"+awardName)
+    let data = await response.json()
+    return data;
+}
+getSongsByAward("Platinium").then(data => console.log(data));
