@@ -11,5 +11,5 @@ L'application JS a besoin de tourner sur un serveur http pour pouvoir gérer les
 
 # EXPLICATIONS SUR LE DESIGN DE L'APPLICATION
 
-Chaque étudiant a un fichier html et un fichier js (script d3) propre et l'index est un accueil qui permet de rediriger vers les pages de chaque étudiant (leurs travaux)
-Les scripts js se trouvant dans modules représentent le code en commun à tous les étudiants.
+Chaque personne a un fichier html et un fichier js (script d3) propre et l'index est un accueil qui permet de rediriger vers les pages de chacun (visualisations)
+Les scripts js qui se trouvent dans modules représentent le code des fonctions qui peuvent servir à tout le monde (il suffit d'importer les fonctions dont vous avez besoin dans votre sript)
