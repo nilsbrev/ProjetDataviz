@@ -4,7 +4,7 @@ L'application JS a besoin de tourner sur un serveur http pour pouvoir gérer les
 
 #### A installer :
 * Node 14.15.1
-* Les dépendances pour faire tourner le serveur, à savoir **connect** et **serve-static**. Exécuter la commmande `npm connect serve-static` dans un terminal depuis la racine du projet (au même niveau que le fichier nils.js)
+* Les dépendances pour faire tourner le serveur, à savoir **connect** et **serve-static**. Exécuter la commmande `npm connect serve-static` dans un terminal depuis la racine du projet
 
 #### Pour exécuter l'application :
 * Lancer le serveur http qui se chargera de servir la ressource **index.html** : `node server.js`
