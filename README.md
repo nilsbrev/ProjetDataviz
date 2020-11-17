@@ -1,6 +1,6 @@
 # INSTRUCTIONS POUR INSTALLER ET EXECUTER L'APPLICATION
 
-L'application JS a besoin de tourner sur un serveur http pour pouvoir gérer les imports de modules et autres facécities propres à JS.
+L'application JS a besoin de tourner sur un serveur http pour pouvoir gérer les imports de modules etc
 
 #### A installer :
 * Node 14.15.1
