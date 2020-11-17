@@ -7,7 +7,7 @@ L'application JS a besoin de tourner sur un serveur http pour pouvoir gérer les
 * Les dépendances pour faire tourner le serveur, à savoir **connect** et **serve-static**. Exécuter la commmande `npm connect serve-static` dans un terminal depuis la racine du projet
 
 #### Pour exécuter l'application :
-* Lancer le serveur http qui se chargera de servir la ressource **index.html** : `node server.js`
+* Lancer le serveur http qui se chargera de servir les ressources **index.html, nils.html, ...** : `node server.js`
 
 # EXPLICATIONS SUR LE DESIGN DE L'APPLICATION
 
