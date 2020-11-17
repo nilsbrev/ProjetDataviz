@@ -1,3 +1,5 @@
+import { getAlbumsTitlesByAward } from "./fetchdata.js";
+
 async function main(){
     //getSongsByAward("Platinum").then(data => console.log(data));
 //rund3(getSongsByAward("Platinum"))

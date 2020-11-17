@@ -1,7 +1,10 @@
+import { getSongsByAward } from "./modules/apiwrapper.mjs";
+import { populatePara } from "./modules/testing.mjs";
+
 /** Functions which extract and transform payloads into a clean dataset for d3 **/
 
 // Get a list of albums title from API call (Strings)
-async function getAlbumsTitlesByAward(awardName,filter){
+export async function getAlbumsTitlesByAward(awardName,filter){
     getSongsByAward(awardName).then(data => {
             for (let i = 0; i < data.length; i++) {
                 let res = data[i];
