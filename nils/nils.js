@@ -1,4 +1,4 @@
-import { getAlbumsTitlesByAward } from "./modules/fetchdata.mjs";
+import { getAlbumsTitlesByAward } from "../modules/fetchdata.mjs";
 
 async function main(){
     //getSongsByAward("Platinum").then(data => console.log(data));
