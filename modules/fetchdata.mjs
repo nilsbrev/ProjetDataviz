@@ -1,5 +1,5 @@
-import { getSongsByAward } from "./modules/apiwrapper.mjs";
-import { populatePara } from "./modules/testing.mjs";
+import { getSongsByAward } from "./apiwrapper.mjs";
+import { populatePara } from "./testing.mjs";
 
 /** Functions which extract and transform payloads into a clean dataset for d3 **/
 
