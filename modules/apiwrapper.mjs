@@ -9,4 +9,10 @@ export async function getSongsByAward(awardName) {
     let response = await fetch("https://wasabi.i3s.unice.fr/search/award/"+awardName);
     let data = await response.json();
     return data;
+
+}export async function getSongInfoWithId(id) {
+    // async, await, then servent à forcer le synchronisme (par défaut js asynchrone)
+    let response = await fetch("https://wasabi.i3s.unice.fr/api/v1/song/id/"+id);
+    let data = await response.json();
+    return data;
 }
