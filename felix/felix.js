@@ -296,7 +296,7 @@ let donnees = d3.json("wasabi-artist.json", function(data) {
     loc = getLocations(data);
     let coords = d3.json("country-coord.json", function(coord) {
         coordonnees = coord;
-        getCoord(coordonnees, getLocations(data));
+        //getCoord(coordonnees, getLocations(data));
 
         let markers = getCoord(coordonnees, loc);
 
