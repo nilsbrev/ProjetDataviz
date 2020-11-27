@@ -4,15 +4,16 @@
     <meta charset="utf-8">
     <title>Script Felix</title>
 </head>
-<p>Le script d3 de felix</p>
 <body>
-
-<script src="https://d3js.org/d3.v6.min.js"></script>
-
-<!-- fichier JS -->
-<script type="module" src="felix.js"></script>
-<script type="module" src="../modules/apiwrapper.mjs"></script>
-<script type="module" src="../modules/testing.mjs"></script>
-<script type="module" src="../modules/fetchdata.mjs"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+    
+    
+    <div id="my_dataviz_div">
+        <svg id="my_dataviz" width="1300" height="900   "></svg>
+    </div>
+    
+    <!-- fichier JS -->
+    <script src="felix.js"></script>    
 </body>
 </html>
