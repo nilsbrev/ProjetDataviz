@@ -1,4 +1,4 @@
-/* global d3, topojson */
+/* global topojson, d3 */
 const countries = ["Afghanistan",
     "Albania",
     "Algeria",
@@ -242,6 +242,49 @@ const countries = ["Afghanistan",
     "Zimbabwe"
 ];
 
+
+        
+function showVal(newVal){
+    document.getElementById("topCb").checked = false;
+    document.getElementById("middleCb").checked = false;
+    document.getElementById("bottomCb").checked = false;
+    let svg = d3.select("svg");
+    svg.selectAll("circle").transition().duration(200).style("opacity", function(d){
+        if(d.cpt >= document.getElementById("myRange").value){
+            document.getElementById("theRange").innerHTML = "[" + newVal + " - 17000]";
+            return 1;
+        } else {
+            document.getElementById("theRange").innerHTML = "[" + newVal + " - 17000]";
+            return 0;
+        }
+    });
+}
+
+function cBoxListener(){
+    let svg = d3.select("svg");
+    //reset the input range
+    document.getElementById("theRange").innerHTML = "[0 - 17000]";
+    document.getElementById("myRange").value = 0;
+    //reset des circle
+    svg.selectAll("circle").transition().duration(0).style("opacity", 0);
+    if(document.getElementById("topCb").checked){
+        //affichage
+        svg.selectAll(".top").transition().duration(200).style("opacity", 1);
+    }
+    if(document.getElementById("middleCb").checked){
+        svg.selectAll(".middle").transition().duration(200).style("opacity", 1);
+    }
+    if(document.getElementById("bottomCb").checked){
+        svg.selectAll(".bottom").transition().duration(200).style("opacity", 1);
+    }
+    if(!document.getElementById("topCb").checked && !document.getElementById("middleCb").checked && !document.getElementById("bottomCb").checked){
+        svg.selectAll(".top").transition().duration(200).style("opacity", 1);
+        svg.selectAll(".middle").transition().duration(200).style("opacity", 1);
+        svg.selectAll(".bottom").transition().duration(200).style("opacity", 1);
+    }
+    
+}
+
 //fonction créant notre JSON de localisations à partir du JSON-BD
 function getLocations(data) {
     const locations = new Map();
@@ -276,7 +319,7 @@ function getCoord(coord, localisations) {
                 lat = coordcountry.latitude;
             }
         });
-
+        //Map exemple : {country:"France", cpt:1513, long:2, lat:46}
         dataForMap.push({
             country: country,
             cpt: compteur,
@@ -287,6 +330,7 @@ function getCoord(coord, localisations) {
     return dataForMap;
 }
 
+//variables globales
 let coordonnees = null;
 let loc = null;
 let max = 0;
@@ -294,27 +338,23 @@ let max = 0;
 //récupération de nos données à l'aide du JSON fourni par le prof 
 let donnees = d3.json("wasabi-artist.json", function(data) {
     loc = getLocations(data);
-    let coords = d3.json("country-coord.json", function(coord) {
+    d3.json("country-coord.json", function(coord) {
         coordonnees = coord;
-        //getCoord(coordonnees, getLocations(data));
-
         let markers = getCoord(coordonnees, loc);
-
+        
         //récupération du SVG
         var svg = d3.select("svg"),
             width = +svg.attr("width"),
             height = +svg.attr("height");
-
+                        
         //set des propriétés de la map
         var projection = d3.geoMercator()
             .center([0, 0]) // GPS of location to zoom on
-            .scale(150) // This is like the zoom
+            .scale(250) // This is like the zoom
             .translate([width/2, height/2]);
 
-
-        //récupération du JSON de la map 
+        //récupération du JSON de la map (si le lien git est mort, vous pouvez modifier l'url pour charger le fichier save-geojson.json)
         d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson", function(data) {
-
             //récupération de la map
             data.features = data.features.filter(function(d) {
                 return d;
@@ -325,33 +365,34 @@ let donnees = d3.json("wasabi-artist.json", function(data) {
                 .append("div")
                 .attr("class", "tooltip")
                 .style("opacity", 1)
-                .style("background-color", "white")
-                .style("border", "solid")
-                .style("border-width", "2px")
-                .style("border-radius", "1px")
-                .style("padding", "5px");
+                .style("background-color", "#666666")
+                .style("color", "white")
+                .style("border", "solid grey")
+                .style("border-radius", "5px")
+                .style("padding", "5px")
+                .style("position","absolute");
 
-            //Quand on a la souris sur un point, on affiche la div avec les infos 
+            //Quand on a la souris sur un point, on affiche le tooltip avec les infos 
             var mouseover = function(d) {
                 Tooltip.style("opacity", 1);
-                //console.log("MOUSEOVER");
             };
-            //Quand on bouge la souris sur un point, ca affiche les infos 
+            //Quand on bouge la souris sur un point, ca affiche les infos dans le tooltip
             var mousemove = function(d) {
                 Tooltip
                     .html(d.country + "<br>" + d.cpt + " artiste(s)") //exemple avec un JSON du type : {name:, long:, lat:}
-                    .style("left", (d3.mouse(this)[0] + 10) + "px")
-                    .style("top", (d3.mouse(this)[1]) + "px"); //gère la position de la div par rapport à la souris mais c'est éclaté ca marche pas
+                    .style("left", (d3.event.pageX + 10) + "px")
+                    .style("top", (d3.event.pageY) + "px"); //gère la position de la div par rapport à la souris mais c'est éclaté ca marche pas
             };
-            //On cache les infos quand on enlève la souris du point
+            
+            //On cache les infos du tooltip quand on enlève la souris du point
             var mouseleave = function(d) {
                 Tooltip.style("opacity", 0);
             };
             
+            //Affiche les infos dans la console au click sur un point
             var mouseclick = function(d) {
                 console.log("Country : " + d.country + "\n nombre : " + d.cpt);
             };
-
 
             //Dessine la map
             svg.append("g")
@@ -365,11 +406,14 @@ let donnees = d3.json("wasabi-artist.json", function(data) {
                 )
                 .style("stroke", "black")
                 .style("opacity", .3);
-
+            
             //Ajoute les points à la map
-            svg
-                .selectAll("myCircles")
-                .data(markers)
+            svg.selectAll("myCircles")
+                .data(markers)/*
+                .filter(function(d){ //permettant de n'afficher que les points avec cpt > valeur du slider (not working)
+                    //console.log(d.cpt, document.getElementById("myRange").value); 
+                    return (boolean) d.cpt >= document.getElementById("myRange").value;
+                })       */         
                 .enter()
                 .append("circle")
                 .attr("cx", function(d) {
@@ -381,17 +425,31 @@ let donnees = d3.json("wasabi-artist.json", function(data) {
                 .attr("r",function(d) {
                     let rayon = 2+(40*(d.cpt/max)); 
                     return rayon;
-                }) // rayon adaptatif à prévoir (maybe utiliser les linearscale et compagnie
+                }) // rayon adaptatif 
                 .style("fill", "#57b45d")
                 .attr("stroke", "#57b45d")
                 .attr("stroke-width", 2)
                 .attr("fill-opacity", .4)
+                .attr("id", "circle")
+                .attr("class", function(d){
+                    if(d.cpt < 100){
+                        return "bottom";
+                    }
+                    else if(d.cpt >= 100 && d.cpt < 500){
+                        return "middle";
+                    } else {
+                        return "top";}
+                    })
+                .style("opacity", 1)
                 .on("mouseover", mouseover)
                 .on("mousemove", mousemove) //affiche les données des points sur lesquels on passe la souris 
                 .on("mouseleave", mouseleave)
                 .on("click", mouseclick);
-
-
+                /*
+            /zoom --> not working very well :/
+            svg.call(d3.zoom().on("zoom", function () {
+                 svg.attr("transform", d3.event.transform);
+            }));*/
         });
     });
 });
