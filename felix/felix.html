@@ -2,15 +2,127 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
     <title>Script Felix</title>
+    <style>
+        svg{
+            margin-top:100px;
+        }
+        div.container{
+            position:absolute;
+        }
+        div.my_dataviz_div{  
+            border: solid 1px;
+        }
+        input[type="range"] {
+            width:200px;
+        }
+        input:checked[type="checkbox"] + label {
+            background-color: #6dd65d;
+        }
+        p{
+            color:#fff;
+            font: 1.2em "Fira Sans", sans-serif;
+        }
+        table{
+            border-radius:10px;
+            padding-bottom:10px;
+            background-color: #6a8494;
+        }
+        th {
+            color:#fff;
+            font: 1.2em "Fira Sans", sans-serif;
+            margin-right:-30px;
+            width:500px;
+        }
+        label {
+            font: 1.2em "Fira Sans", sans-serif;
+            display: block;
+            position: relative;
+            margin-top:-20px;
+            margin-left:-10px;
+            margin-right:20px;
+            margin-bottom:10px;
+            padding: 15px 50px 15px 62px;
+            border: 3px solid #fff;
+            border-radius: 50px;
+            color: #fff;
+            background-color: #6a8494;
+            box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+            white-space: nowrap;
+            cursor: pointer;
+            transition: background-color .2s, box-shadow .2s;
+        }
+        label::before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 10px;
+            bottom: 10px;
+            left: 10px;
+            width: 32px;
+            border: 3px solid #fff;
+            border-radius: 100px;
+            transition: background-color .2s;
+        }
+/*
+        label:first-of-type {
+          transform: translateX(-40px);
+        }
+
+        label:last-of-type {
+          transform: translateX(40px);
+        }
+*/
+        label:hover, input:focus + label {
+            box-shadow: 0 0 20px rgba(0, 0, 0, .6);
+        }
+
+        input:checked + label {
+            background-color: #6dd65d;
+        }
+
+        input:checked + label::before {
+            background-color: #fff;
+        }
+        </style>
+        
 </head>
 <body>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
     
+    <div class="container">
+        <table class="table">
+            <tr>
+                <th>Sélectionnez la taille minimum à afficher :  </th>
+                <td>
+                    <p id="theRange">[0 - 17000]</p>
+                    <input size="50" type="range" min="0" max="17000" value="0" id="myRange" oninput="showVal(this.value)">
+                </td>
+            </tr>
+                
+            <tr>
+                <th>Sélectionnez par intervalle prédéfinie</th>
+                <td>
+                    <input id="topCb" type="checkbox" onchange="cBoxListener()" />
+                    <label for="topCb">[500 - 17000]</label>
+                </td>
+                <td>
+                    <input id="middleCb" type="checkbox" onchange="cBoxListener()" />
+                    <label for="middleCb">[100 - 500]</label>
+                </td>
+                <td>
+                    <input id="bottomCb" type="checkbox" onchange="cBoxListener()" />
+                    <label for="bottomCb">[0 - 100]</label>
+                </td>
+            </tr>
+        </table>
+    </div>
+
     
     <div id="my_dataviz_div">
-        <svg id="my_dataviz" width="1300" height="900   "></svg>
+         <svg id="my_dataviz" width="1580" height="1200"></svg>
     </div>
     
     <!-- fichier JS -->
