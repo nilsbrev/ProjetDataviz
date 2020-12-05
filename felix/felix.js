@@ -282,8 +282,8 @@ function cBoxListener(){
         svg.selectAll(".middle").transition().duration(200).style("opacity", 1);
         svg.selectAll(".bottom").transition().duration(200).style("opacity", 1);
     }
-    
 }
+
 
 //fonction créant notre JSON de localisations à partir du JSON-BD
 function getLocations(data) {
@@ -445,11 +445,12 @@ let donnees = d3.json("wasabi-artist.json", function(data) {
                 .on("mousemove", mousemove) //affiche les données des points sur lesquels on passe la souris 
                 .on("mouseleave", mouseleave)
                 .on("click", mouseclick);
-                /*
-            /zoom --> not working very well :/
+        
+        /* Zoom not working well and bugs 
             svg.call(d3.zoom().on("zoom", function () {
                  svg.attr("transform", d3.event.transform);
-            }));*/
+            }));
+        */
         });
     });
 });
