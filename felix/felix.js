@@ -353,8 +353,9 @@ let donnees = d3.json("wasabi-artist.json", function(data) {
             .scale(250) // This is like the zoom
             .translate([width/2, height/2]);
 
-        //récupération du JSON de la map (si le lien git est mort, vous pouvez modifier l'url pour charger le fichier save-geojson.json)
-        d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson", function(data) {
+        //récupération du JSON de la map (source initiale : https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson)
+        //utilisation de save-geojson pour assurer la disponibilité lors de la notation / soutenance 
+        d3.json("save-geojson.json", function(data) {
             //récupération de la map
             data.features = data.features.filter(function(d) {
                 return d;
