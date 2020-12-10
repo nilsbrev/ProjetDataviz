@@ -79,3 +79,12 @@ input:checked + label {
 input:checked + label::before {
     background-color: #fff;
 }
+a{
+    font: 1.2em "Fira Sans", sans-serif;
+    margin-left:20px;
+    padding:10px;    
+    color:#fff;
+    border-radius:10px;
+    padding-bottom:10px;
+    background-color: #6a8494;
+}
