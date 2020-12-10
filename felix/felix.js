@@ -354,7 +354,7 @@ let donnees = d3.json("wasabi-artist.json", function(data) {
             .translate([width/2, height/2]);
 
         //récupération du JSON de la map (source initiale : https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson)
-        //utilisation de save-geojson pour assurer la disponibilité lors de la notation / soutenance 
+        //utilisation de save-geojson pour assurer la disponibilité lors de la notation / soutenance  
         d3.json("save-geojson.json", function(data) {
             //récupération de la map
             data.features = data.features.filter(function(d) {
