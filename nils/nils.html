@@ -3,18 +3,42 @@
 <head>
     <meta charset="utf-8">
     <title>Projet D3 M2 MIAGE IDP</title>
+    <style type="text/css">
+        svg {
+            font: 10px sans-serif;
+            shape-rendering: crispEdges;
+        }
+
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #000;
+        }
+
+        path.domain {
+            stroke: none;
+        }
+
+        .y .tick line {
+            stroke: #ddd;
+        }
+    </style>
 </head>
+
 <body>
-<div><button id="draw">Update Values</button></div>
+<center><h1>Répartition des sexes des artistes par Pays</h1></center>
 <div id="chart"></div>
 
 
-<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://d3js.org/d3-path.v2.min.js"></script>
+<script src="https://d3js.org/d3-shape.v2.min.js"></script>
 
 <!-- fichier JS -->
 <script type="module" src="nils.js"></script>
 <script type="module" src="../modules/apiwrapper.mjs"></script>
 <script type="module" src="../modules/testing.mjs"></script>
 <script type="module" src="../modules/fetchdata.mjs"></script>
+
 </body>
 </html>
