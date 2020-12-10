@@ -337,10 +337,12 @@ let max = 0;
 
 //récupération de nos données à l'aide du JSON fourni par le prof 
 let donnees = d3.json("wasabi-artist.json", function(data) {
+    console.log(data);
     loc = getLocations(data);
     d3.json("country-coord.json", function(coord) {
         coordonnees = coord;
         let markers = getCoord(coordonnees, loc);
+        console.log(markers);
         
         //récupération du SVG
         var svg = d3.select("svg"),
